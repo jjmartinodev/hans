@@ -19,7 +19,7 @@ GLuint load_shader(GLenum kind, const char *source) {
   }
   return shader;
 }
-
+ 
 Shader *hs_create_shader(const char *vertex_shader_source,
                          const char *fragment_shader_source) {
   GLuint vertex_shader = load_shader(GL_VERTEX_SHADER, vertex_shader_source);
