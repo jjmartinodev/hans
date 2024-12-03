@@ -1,29 +1,24 @@
-
+#include "window.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HANS_SUCESSFUL 1
-#define HANS_FAILED 0
+namespace hs {
 
-struct ClearColor {
-  float r, g, b;
-};
-
-struct ClearColor clear_color = {
-    .r = 0.,
-    .g = 0.,
-    .b = 0.,
-};
+namespace window {
 
 GLFWwindow *window = NULL;
 
-int hs_init(unsigned int width, unsigned int height, const char *title) {
+int init(unsigned int width, unsigned int height, const char *title) {
   if (glfwInit() != GLFW_TRUE) {
     fprintf(stderr, "failed to init glfw\n");
     return HANS_FAILED;
   }
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
   glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
   window = glfwCreateWindow((int)width, (int)height, title, NULL, NULL);
   if (window == NULL) {
@@ -45,16 +40,19 @@ int hs_init(unsigned int width, unsigned int height, const char *title) {
 
   return HANS_SUCESSFUL;
 }
-void hs_uptade_events() { glfwPollEvents(); }
-int hs_running() { return glfwWindowShouldClose(window); }
-void hs_clear(float red, float green, float blue) {
+
+void uptade_window() {
+  glfwPollEvents();
   glfwSwapBuffers(window);
-  if (clear_color.r != red || clear_color.g != green || clear_color.b != blue) {
-    glClearColor(red, green, blue, 0.0f);
-  }
-  glClear(GL_COLOR_BUFFER_BIT);
 }
-void hs_deinit() {
+
+int running() { return glfwWindowShouldClose(window); }
+
+void deinit() {
   glfwDestroyWindow(window);
   glfwTerminate();
 }
+
+} // namespace window
+
+} // namespace hs

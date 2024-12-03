@@ -13,13 +13,9 @@ include_directories(
 add_library(
   ${PROJECT_NAME}
   STATIC
-  src/window.c
-  src/texture.c
+  src/window.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${OPENGL_GL_LIBRARY} glew glfw m)
 
-add_executable(clear_example examples/clear.c)
+add_executable(clear_example examples/clear.cpp)
 target_link_libraries(clear_example ${PROJECT_NAME})
-
-add_executable(manyaliens_example examples/manyaliens.c)
-target_link_libraries(manyaliens_example ${PROJECT_NAME})
