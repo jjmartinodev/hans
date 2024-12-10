@@ -1,3 +1,6 @@
+#ifndef HANS_WINDOW_HEADER
+#define HANS_WINDOW_HEADER
+
 #define HANS_SUCESSFUL 1
 #define HANS_FAILED 0
 
@@ -6,3 +9,6 @@ void hs_uptade_events();
 int hs_running();
 void hs_clear(float red, float green, float blue);
 void hs_deinit();
+double hs_time();
+
+#endif

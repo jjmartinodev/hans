@@ -6,19 +6,28 @@
 GLFWwindow *window;
 
 int hs_init(unsigned int width, unsigned int height, const char *title) {
-  if (!glfwInit()) {
+  if (glfwInit() != GLFW_TRUE) {
+    fprintf(stderr, "failed to init glfw\n");
     return HANS_FAILED;
   }
-  window =
-      glfwCreateWindow((int)width, (int)height, "hiii", (void *)0, (void *)0);
-  if (!window) {
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+  glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+  window = glfwCreateWindow((int)width, (int)height, title, NULL, NULL);
+  if (window == NULL) {
+    fprintf(stderr, "failed to init window\n");
     glfwTerminate();
     return HANS_FAILED;
   }
+
   glfwMakeContextCurrent(window);
+
   GLenum err;
+
   if ((err = glewInit()) == GLEW_OK) {
-    fprintf(stderr, "failed here");
+    fprintf(stderr, "failed to init glew %s\n", glewGetErrorString(err));
     glfwDestroyWindow(window);
     glfwTerminate();
     return HANS_FAILED;
@@ -41,4 +50,7 @@ void hs_clear(float red, float green, float blue) {
 void hs_deinit() {
   glfwDestroyWindow(window);
   glfwTerminate();
+}
+double hs_time() {
+  return glfwGetTime();
 }

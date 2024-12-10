@@ -23,3 +23,6 @@ target_link_libraries(${PROJECT_NAME} ${OPENGL_GL_LIBRARY} glew_s glfw m)
 
 add_executable(clear_example examples/clear.c)
 target_link_libraries(clear_example ${PROJECT_NAME})
+
+add_executable(vertex_buffer_example examples/mesh.c)
+target_link_libraries(vertex_buffer_example ${PROJECT_NAME})
