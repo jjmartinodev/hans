@@ -1,4 +1,4 @@
-#include "../src/window.h"
+#include "../include/hans.h"
 #include <GL/glew.h>
 #include <stdio.h>
 
@@ -8,8 +8,8 @@ int main(void) {
     return 1;
   }
   while (hs_running()) {
-    hs_uptade_events();
-    hs_clear(0.7, 0.3, 0.5);
+    hs_uptade_window();
+    hs_clear(0.7, 0.3, 0.5, 1.0);
   }
   hs_deinit();
 }

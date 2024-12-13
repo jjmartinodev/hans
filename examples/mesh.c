@@ -1,7 +1,6 @@
-#include "../src/mesh.h"
-#include "../src/shader.h"
-#include "../src/window.h"
-#include <GL/glew.h>
+#include "../include/core/mesh.h"
+#include "../include/core/shader.h"
+#include "../include/hans.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -48,7 +47,7 @@ const char fs_source[] = "#version 330 core\n"
                          "}\n";
 
 int main(void) {
-  if (hs_init(800, 600, "hii") != HANS_SUCESSFUL) {
+  if (hs_init(800, 600, "mesh thingy") != HANS_SUCESSFUL) {
     printf("failed to init hans!");
     return 1;
   }
@@ -66,8 +65,8 @@ int main(void) {
   float t = 100.0;
 
   while (hs_running()) {
-    hs_uptade_events();
-    hs_clear(0.7, 0.3, 0.5);
+    hs_uptade_window();
+    hs_clear(0.7, 0.3, 0.5, 1.0);
 
     float now = (float)hs_time();
     t += now - past;
